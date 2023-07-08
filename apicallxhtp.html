@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+<body>
+
+
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Username</th>
+      <th scope="col">Email</th>
+      
+    </tr>
+  </thead>
+  <tbody id ="tables">
+    
+  </tbody>
+</table>
+    <script>
+
+    const xhr = new XMLHttpRequest();
+xhr.open("GET", "https://jsonplaceholder.typicode.com/users");
+
+
+xhr.onreadystatechange = () => {
+ 
+  if (xhr.readyState !== 4) return;
+
+  if (xhr.status === 200) {
+   
+    console.log(JSON.parse(xhr.responseText));
+  } else {
+    
+    console.log("HTTP error", xhr.status, xhr.statusText);
+  }
+
+  var data= JSON.parse(xhr.responseText);
+  const mycontent = document.querySelector('#tables');
+
+   const showhtml= data.map(function(item , id){
+
+     console.log(`${item.name}`)
+
+     
+        return `
+  <tr>
+      <th scope="row">${item.id}</th>
+      <td>${item.name}</td>
+      <td>${item.username}</td>
+      <td>${item.email}</td>
+      
+    </tr>
+
+        `
+  })
+   mycontent.innerHTML = showhtml;
+
+
+};
+
+  
+
+xhr.send();
+
+
+    </script>
+</body>
+</html>
