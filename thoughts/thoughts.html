@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="stylr.css" />
+    <title>Thoughts</title>
+
+<style>
+  body  {
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1xfsS05XMLni4m8Bkn9PyKadQpqICHyYGsw&usqp=CAU");
+  background-color: #cccccc;
+   background-repeat: no-repeat;
+   background-size: cover;
+  background-position: center;
+   
+}
+</style>
+
+  </head>
+  <body>
+
+   <div class="heading">
+    <h1>
+      Enter Type of quote you want to see.
+    </h1>
+   </div>
+
+
+    </div>
+    <div class="input-group mb-3 search">
+      <input
+        type="text"
+        id="search"
+        class="form-control"
+        onchange="searchnew()"
+        placeholder="Search for quote"
+        aria-label="Search for thought "
+        aria-describedby="button-addon2"
+      />
+      <button
+        class="btn btn-outline-secondary"
+        type="button"
+        id="button-search"
+        onclick="thoughtsapi()"
+      >
+        Search
+      </button>
+    </div>
+
+    <h1>
+
+    <div id="result">
+    
+
+    </div>
+    </h1>
+
+
+
+
+    <h3>
+      <div id="author">
+
+
+    </div>
+    </h3>
+    <script>
+      let category;
+
+      function searchnew() {
+        category = document.getElementById("search").value;
+      }
+
+      function thoughtsapi() {
+        let string1 = "";
+        let string2 = "";
+        let loader = `<div class="boxLoading">
+         
+          <img src="spinner.gif" alt="spinner" width="100" height="100">
+          </div>`;
+        document.getElementById('result').innerHTML = loader;
+        document.getElementById('author').innerHTML = null;
+
+        const xhr = new XMLHttpRequest();
+
+        xhr.open(
+          "GET",
+          "https://api.api-ninjas.com/v1/quotes?category=" + category
+        );
+
+        xhr.setRequestHeader(
+          "X-Api-Key",
+          "flah8baox2NVL/pt22apKg==s9TkWoyOG36YPEZG"
+        );
+        xhr.setRequestHeader("content-type", "application/json");
+
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState == 4) {
+            if (xhr.status === 200) {
+              console.log(xhr.responseText);
+            } else {
+              console.log("error occured");
+            }
+
+
+
+            var data = xhr.responseText;
+           var jsonstring = `${data}`
+
+            var obj =JSON.parse(jsonstring);
+          }
+
+
+          for(var i=0; i< obj.length ; i++){
+
+            string1  +=   `Thought -<q> ${obj[i].quote}</q>`;
+            string2 +=  ` Author - ${obj[i].author}`
+          }
+
+
+          document.getElementById("result").innerHTML= string1;
+          document.getElementById("author").innerHTML= string2;
+
+
+      
+        };
+        xhr.send();
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+.body{
+  background-image: url("https: //amymhaddad.s3.amazonaws.com/morocco-blue.png");
+}
+
+
+.search{
+  max-width: 400px;
+  margin: auto;
+  margin-top: 50px;
+  
+}
+
+#result{
+
+  background-color: rgb(168, 167, 168);
+  color:purple;
+  text-align: center;
+  padding: 50px 50px;
+  margin: 25px 25px;
+  border-radius: 15px;
+}
+
+#author{
+
+  background-color: antiquewhite;
+  text-align: center;
+
+  color: blueviolet;
+  padding: 50px 50px;
+    margin: 25px 25px;
+    border-radius: 15px;
+
+}
+.heading h1{
+
+  text-align: center;
+  color: brown;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: 600;
+  margin-top: 50px;
+  font-size: 50px;
+
+}
+
+
